@@ -12,9 +12,12 @@ understand Object-Oriented Programming.
 # Getting started
 
 You can clone this unfinished version of the game or you can build one yourself.
-The starter code in this [repository](https://github.com/udacity/ipnd_rps_starter_code)
+
+The starter code is in this [repository](https://github.com/udacity/ipnd_rps_starter_code).
 First check the starter code and play the demo provided.
-The project rubric can be found on [Udacity](https://review.udacity.com/#!/rubrics/1956/view)
+
+The project rubric can be found on [Udacity](https://review.udacity.com/#!/rubrics/1956/view).
+
 The purpose of this project is to use Python classes.
 
 # Dependencies
