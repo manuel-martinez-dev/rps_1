@@ -3,10 +3,11 @@
 """This program plays a game of Rock, Paper, Scissors between two Players,
 and reports both Player's scores each round."""
 import random
+import sys
 from colorama import init
 from colorama import Fore, Back, Style
 print(Fore.RED, Style.DIM + "Are you ready to play ROCK, PAPER, SCISSORS?"'\n')
-
+print(Style.RESET_ALL)
 moves = ['rock', 'paper', 'scissors']
 
 """The Player class is the parent class for all of the Players
@@ -21,6 +22,11 @@ class Player:
         pass
 
 
+class AllRocker(Player):
+    def move(self):
+        return 'rock'
+
+
 class RandomPlayer(Player):
     def move(self):
         return random.choice(moves)
@@ -29,7 +35,7 @@ class RandomPlayer(Player):
 class HumanPlayer(Player):
     def move(self):
         while True:
-            chose = input("whatcha u gonna play?:")
+            chose = input("whatcha u gonna play?:"'\n')
             if chose in moves:
                 return chose
 
@@ -79,15 +85,29 @@ class Game:
 
         if beats(move1, move2):
             self.score1 += 1
-            print(Fore.BLUE + "Player 1 Has won!")
-
+            print(Fore.BLUE + "YOU Have won!")
         elif beats(move2, move1):
             self.score2 += 1
-            print(Fore.RED + "Player 2 Has won!")
-
+            print(Fore.RED + "JOHNNY5 Has won!")
         else:
             print(Fore.YELLOW + "DRAW!!")
+#        print(f"Player 1: {self.score1} Player 2: {self.score2}")
 
+        self.p1.learn(move1, move2)
+        self.p2.learn(move2, move1)
+
+    def more_rounds(self):
+        move1 = self.p1.move()
+        move2 = self.p2.move()
+        print(f"Player 1: {move1}  Player 2: {move2}")
+        if beats(move1, move2):
+            self.score1 += 1
+            print(Fore.BLUE + "YOU Have won!")
+        elif beats(move2, move1):
+            self.score2 += 1
+            print(Fore.RED + "JOHNNY5 Has won!")
+        else:
+            print(Fore.YELLOW + "DRAW!!")
 #        print(f"Player 1: {self.score1} Player 2: {self.score2}")
 
         self.p1.learn(move1, move2)
@@ -95,49 +115,48 @@ class Game:
 
     def play_game(self):
         print("Game start!"'\n')
-        for round in range(3):
+        for round in range(1):
             print(f"Round {round}:")
             self.play_round()
-
-        print(f"Player 1: {self.score1} Player 2: {self.score2}")
-
+        print(Fore.WHITE + f"YOU: {self.score1} JOHNNY5: {self.score2}")
         if self.score1 > self.score2:
-            print(Back.BLUE, Fore.BLACK + "Player 1 is TRIUMPHANT!")
-            init()
+            print(Fore.GREEN + "YOU ARE TRIUMPHANT!")
         elif self.score1 < self.score2:
-            print(Back.RED, Fore.BLACK + "Player 2 is VICTORIOUS!")
-            init()
+            print(Fore.BLUE + "JOHNNY5 is VICTORIOUS!")
         else:
-            print(Back.YELLOW, Fore.BLACK + "Outta breath? - it's a DRAW!")
-            init()
+            print(Fore.YELLOW + "Outta breath?-DRAW!!")
         print('\n'"Game over!")
+
+        mode = input("play longer?[yes,no]"'\n')
+        while True:
+            if mode == 'no':
+                print("Until next time...")
+                sys.exit(0)
+            elif mode == 'yes':
+                for round in range(5):
+                    print(f"Round {round}:")
+                    self.more_rounds()
+                print(Fore.WHITE + f"YOU:{self.score1} JOHNNY5:{self.score2}")
+                if self.score1 > self.score2:
+                    print(Fore.GREEN + "YOU ARE TRIUMPHANT!")
+                elif self.score1 < self.score2:
+                    print(Fore.BLUE + "JOHNNY5 is VICTORIOUS!")
+                else:
+                    print(Fore.YELLOW + "Outta breath?-DRAW!!")
+                print('\n'"Game over!")
+                break
+#                sys.exit(0)
+            else:
+                print("YOU should have chosen wisely - GOODBYE!!!")
+                sys.exit(0)
 
 
 if __name__ == '__main__':
-    players = input(Fore.GREEN + """Chose your opponent!!:
-    'dwayne', 'gabbler', 'funes', 'froome', 'voyeur'"""'\n')
-    print(Style.RESET_ALL)
-    while True:
-        if players == "dwayne":
-            game = Game(Player(), HumanPlayer())
-            game.play_game()
-            break
-        elif players == "gabbler":
-            game = Game(RandomPlayer(), HumanPlayer())
-            game.play_game()
-            break
-        elif players == "funes":
-            game = Game(ReflectPlayer(), HumanPlayer())
-            game.play_game()
-            break
-        elif players == "froome":
-            game = Game(CyclePlayer(), HumanPlayer())
-            game.play_game()
-            break
-        elif players == "voyeur":
-            game = Game(RandomPlayer(), RandomPlayer())
-            game.play_game()
-            break
+    behaviors = [AllRocker(), RandomPlayer(), CyclePlayer()]
+    behavior = random.choice(behaviors)
+    human = HumanPlayer()
+    game = Game(human, behavior)
+    game.play_game()
 
 #    game.play_game()
 #    print(help())
