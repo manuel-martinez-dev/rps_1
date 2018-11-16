@@ -22,11 +22,6 @@ class Player:
         pass
 
 
-class AllRocker(Player):
-    def move(self):
-        return 'rock'
-
-
 class RandomPlayer(Player):
     def move(self):
         return random.choice(moves)
@@ -51,7 +46,7 @@ class ReflectPlayer(Player):
         self.chose = their_move
 
 
-class CyclePlayer(Player):
+class CyclePlayer(Player):32
     def __init__(self):
         self.choices = 0
 
@@ -97,21 +92,10 @@ class Game:
         self.p2.learn(move2, move1)
 
     def more_rounds(self):
-        move1 = self.p1.move()
-        move2 = self.p2.move()
-        print(f"Player 1: {move1}  Player 2: {move2}")
-        if beats(move1, move2):
-            self.score1 += 1
-            print(Fore.BLUE + "YOU Have won!")
-        elif beats(move2, move1):
-            self.score2 += 1
-            print(Fore.RED + "JOHNNY5 Has won!")
-        else:
-            print(Fore.YELLOW + "DRAW!!")
-#        print(f"Player 1: {self.score1} Player 2: {self.score2}")
-
-        self.p1.learn(move1, move2)
-        self.p2.learn(move2, move1)
+        for round in range(5):
+            print(f"Round {round+1}:")
+            self.play_round()
+        print(Fore.WHITE + f"YOU: {self.score1} JOHNNY5: {self.score2}")
 
     def play_game(self):
         print("Game start!"'\n')
@@ -119,6 +103,7 @@ class Game:
             print(f"Round {round}:")
             self.play_round()
         print(Fore.WHITE + f"YOU: {self.score1} JOHNNY5: {self.score2}")
+
         if self.score1 > self.score2:
             print(Fore.GREEN + "YOU ARE TRIUMPHANT!")
         elif self.score1 < self.score2:
@@ -132,27 +117,24 @@ class Game:
             if mode == 'no':
                 print("Until next time...")
                 sys.exit(0)
+
             elif mode == 'yes':
-                for round in range(5):
-                    print(f"Round {round}:")
                     self.more_rounds()
-                print(Fore.WHITE + f"YOU:{self.score1} JOHNNY5:{self.score2}")
-                if self.score1 > self.score2:
-                    print(Fore.GREEN + "YOU ARE TRIUMPHANT!")
-                elif self.score1 < self.score2:
-                    print(Fore.BLUE + "JOHNNY5 is VICTORIOUS!")
-                else:
-                    print(Fore.YELLOW + "Outta breath?-DRAW!!")
-                print('\n'"Game over!")
-                break
-#                sys.exit(0)
+                    if self.score1 > self.score2:
+                        print(Fore.GREEN + "YOU ARE TRIUMPHANT!")
+                    elif self.score1 < self.score2:
+                        print(Fore.BLUE + "JOHNNY5 is VICTORIOUS!")
+                    else:
+                        print(Fore.YELLOW + "Outta breath?-DRAW!!")
+                    print('\n'"Game over!")
+                    sys.exit(0)
             else:
                 print("YOU should have chosen wisely - GOODBYE!!!")
                 sys.exit(0)
 
 
 if __name__ == '__main__':
-    behaviors = [AllRocker(), RandomPlayer(), CyclePlayer()]
+    behaviors = [Player(), RandomPlayer(), CyclePlayer()]
     behavior = random.choice(behaviors)
     human = HumanPlayer()
     game = Game(human, behavior)
