@@ -11,8 +11,8 @@ print(Fore.RED + Style.DIM + "Are you ready to play ROCK, PAPER, SCISSORS?\n")
 print(Style.RESET_ALL)
 moves = ['rock', 'paper', 'scissors']
 
-"""The Player class is the parent class for all of the Players
-in this game"""
+# The Player class is the parent class for all of the Players
+# in this game
 
 
 class Player:
@@ -31,7 +31,7 @@ class RandomPlayer(Player):
 class HumanPlayer(Player):
     def move(self):
         while True:
-            chose = input("whatcha u gonna play?:"'\n')
+            chose = input("whatcha u gonna play?:\n")
             if chose in moves:
                 return chose
 
@@ -87,7 +87,6 @@ class Game:
             print(Fore.RED + "JOHNNY5 Has won!")
         else:
             print(Fore.YELLOW + "DRAW!!")
-#        print(f"Player 1: {self.score1} Player 2: {self.score2}")
 
         self.p1.learn(move1, move2)
         self.p2.learn(move2, move1)
@@ -99,7 +98,7 @@ class Game:
         print(Fore.WHITE + f"YOU: {self.score1} JOHNNY5: {self.score2}")
 
     def play_game(self):
-        print("Game start!"'\n')
+        print("Game start!\n")
         for round in range(3):
             print(f"Round {round + 1}:")
             self.play_round()
@@ -111,7 +110,7 @@ class Game:
             print(Fore.BLUE + "JOHNNY5 is VICTORIOUS!")
         else:
             print(Fore.YELLOW + "Outta breath?-DRAW!!")
-        print('\n'"Game over!")
+        print('\nGame over!')
 
         mode = input("play longer?[yes,no]\n")
         if mode == 'no':
@@ -133,11 +132,8 @@ class Game:
 
 
 if __name__ == '__main__':
-    behaviors = [Player(), RandomPlayer(), CyclePlayer()]
+    behaviors = [Player(), RandomPlayer(), CyclePlayer(), ReflectPlayer()]
     behavior = random.choice(behaviors)
     human = HumanPlayer()
     game = Game(human, behavior)
     game.play_game()
-
-#    game.play_game()
-#    print(help())
