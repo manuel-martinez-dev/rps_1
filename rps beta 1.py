@@ -46,7 +46,7 @@ class ReflectPlayer(Player):
         self.chose = their_move
 
 
-class CyclePlayer(Player):32
+class CyclePlayer(Player):
     def __init__(self):
         self.choices = 0
 
