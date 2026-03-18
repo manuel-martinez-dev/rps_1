@@ -23,6 +23,10 @@ class Player:
         pass
 
 
+class RockPlayer(Player):
+    pass
+
+
 class RandomPlayer(Player):
     def move(self):
         return random.choice(moves)
@@ -132,7 +136,7 @@ class Game:
 
 
 if __name__ == '__main__':
-    behaviors = [Player(), RandomPlayer(), CyclePlayer(), ReflectPlayer()]
+    behaviors = [RockPlayer(), RandomPlayer(), CyclePlayer(), ReflectPlayer()]
     behavior = random.choice(behaviors)
     human = HumanPlayer()
     game = Game(human, behavior)
