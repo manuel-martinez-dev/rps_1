@@ -5,8 +5,9 @@ and reports both Player's scores each round."""
 import random
 import sys
 from colorama import init
-from colorama import Fore, Back, Style
-print(Fore.RED, Style.DIM + "Are you ready to play ROCK, PAPER, SCISSORS?"'\n')
+from colorama import Fore, Style
+init()
+print(Fore.RED + Style.DIM + "Are you ready to play ROCK, PAPER, SCISSORS?\n")
 print(Style.RESET_ALL)
 moves = ['rock', 'paper', 'scissors']
 
@@ -99,8 +100,8 @@ class Game:
 
     def play_game(self):
         print("Game start!"'\n')
-        for round in range(1):
-            print(f"Round {round}:")
+        for round in range(3):
+            print(f"Round {round + 1}:")
             self.play_round()
         print(Fore.WHITE + f"YOU: {self.score1} JOHNNY5: {self.score2}")
 
@@ -112,25 +113,23 @@ class Game:
             print(Fore.YELLOW + "Outta breath?-DRAW!!")
         print('\n'"Game over!")
 
-        mode = input("play longer?[yes,no]"'\n')
-        while True:
-            if mode == 'no':
-                print("Until next time...")
-                sys.exit(0)
-
-            elif mode == 'yes':
-                    self.more_rounds()
-                    if self.score1 > self.score2:
-                        print(Fore.GREEN + "YOU ARE TRIUMPHANT!")
-                    elif self.score1 < self.score2:
-                        print(Fore.BLUE + "JOHNNY5 is VICTORIOUS!")
-                    else:
-                        print(Fore.YELLOW + "Outta breath?-DRAW!!")
-                    print('\n'"Game over!")
-                    sys.exit(0)
+        mode = input("play longer?[yes,no]\n")
+        if mode == 'no':
+            print("Until next time...")
+            sys.exit(0)
+        elif mode == 'yes':
+            self.more_rounds()
+            if self.score1 > self.score2:
+                print(Fore.GREEN + "YOU ARE TRIUMPHANT!")
+            elif self.score1 < self.score2:
+                print(Fore.BLUE + "JOHNNY5 is VICTORIOUS!")
             else:
-                print("YOU should have chosen wisely - GOODBYE!!!")
-                sys.exit(0)
+                print(Fore.YELLOW + "Outta breath?-DRAW!!")
+            print('\nGame over!')
+            sys.exit(0)
+        else:
+            print("YOU should have chosen wisely - GOODBYE!!!")
+            sys.exit(0)
 
 
 if __name__ == '__main__':
