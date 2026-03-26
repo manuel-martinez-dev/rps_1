@@ -1,29 +1,17 @@
-# Project Title
+# Rock Paper Scissors
 
-Rock Paper Scissors Game.
+> **Work in progress — project is changing scope.**
 
-# Description
+# Origin
 
-The following game is part of the Rock Paper Scissors Game project created by
-[Udacity](https://eu.udacity.com/course/intro-to-programming-nanodegree--nd000)
-as part of their intro to programming course, which its main purpose is to
-understand Object-Oriented Programming.
+This project started as part of the [Udacity Intro to Programming Nanodegree](https://eu.udacity.com/course/intro-to-programming-nanodegree--nd000), built to demonstrate Object-Oriented Programming using Python classes.
 
-# Getting started
+Starter code: [udacity/ipnd_rps_starter_code](https://github.com/udacity/ipnd_rps_starter_code)
 
-You can clone this unfinished version of the game or you can build one yourself.
+# Current Status
 
-The starter code is in this [repository](https://github.com/udacity/ipnd_rps_starter_code).
-First check the starter code and play the demo provided.
-
-The project rubric can be found on [Udacity](https://review.udacity.com/#!/rubrics/1956/view).
-
-The purpose of this project is to use Python classes.
+The project has evolved beyond the original scope. It is now a Flask web application deployed on Vercel, featuring a playable Rock Paper Scissors game against an AI opponent.
 
 # Dependencies
 
-[colorama](https://pypi.org/project/colorama/)
-
-# Extras
-
-In case that you decide to use part of my code, I just want to say thank you... ;)
+See `requirements.txt`
